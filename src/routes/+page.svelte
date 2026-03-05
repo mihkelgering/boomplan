@@ -90,7 +90,7 @@
         <h1>💥 BoomPlan</h1>
         <span class="subtitle">Rust Raid Calculator</span>
       </div>
-      <a class="coffee-btn" href="https://buymeacoffee.com/" target="_blank" rel="noopener">
+      <a class="coffee-btn" href="https://buymeacoffee.com/mihkelgerih" target="_blank" rel="noopener">
         ☕ Buy me a coffee
       </a>
     </div>
