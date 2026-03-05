@@ -1,0 +1,98 @@
+[
+  {
+    "id": "torpedo",
+    "name": "Torpedo",
+    "category": "Submarine",
+    "damage": 350,
+    "sulfur": 0,
+    "notes": "Fired from submarine torpedo tube. Sulfur cost is part of submarine build cost."
+  },
+  {
+    "id": "c4",
+    "name": "Timed Explosive (C4)",
+    "category": "Explosive",
+    "damage": 275,
+    "sulfur": 2200,
+    "notes": "Must be placed directly on ship hull."
+  },
+  {
+    "id": "rocket",
+    "name": "Rocket",
+    "category": "Explosive",
+    "damage": 175,
+    "sulfur": 1400,
+    "notes": ""
+  },
+  {
+    "id": "satchel",
+    "name": "Satchel Charge",
+    "category": "Explosive",
+    "damage": 75,
+    "sulfur": 480,
+    "notes": "Can be dud — may need extra."
+  },
+  {
+    "id": "explosive_ammo",
+    "name": "Explosive 5.56 Ammo",
+    "category": "Explosive",
+    "damage": 26,
+    "sulfur": 25,
+    "notes": "Per bullet."
+  },
+  {
+    "id": "incendiary_rocket",
+    "name": "Incendiary Rocket",
+    "category": "Incendiary",
+    "damage": 120,
+    "sulfur": 1400,
+    "notes": "Deals fire damage over time."
+  },
+  {
+    "id": "fire_arrow",
+    "name": "Fire Arrow",
+    "category": "Incendiary",
+    "damage": 15,
+    "sulfur": 10,
+    "notes": "Per arrow. Slow but cheap."
+  },
+  {
+    "id": "chainsaw",
+    "name": "Chainsaw",
+    "category": "Melee",
+    "damage": 45,
+    "sulfur": 0,
+    "notes": "Requires low grade fuel. Per hit estimate."
+  },
+  {
+    "id": "salvaged_axe",
+    "name": "Salvaged Axe",
+    "category": "Melee",
+    "damage": 35,
+    "sulfur": 0,
+    "notes": "Per hit."
+  },
+  {
+    "id": "hatchet",
+    "name": "Hatchet",
+    "category": "Melee",
+    "damage": 25,
+    "sulfur": 0,
+    "notes": "Per hit."
+  },
+  {
+    "id": "stone_hatchet",
+    "name": "Stone Hatchet",
+    "category": "Melee",
+    "damage": 10,
+    "sulfur": 0,
+    "notes": "Per hit. Very slow."
+  },
+  {
+    "id": "pickaxe",
+    "name": "Pickaxe",
+    "category": "Melee",
+    "damage": 20,
+    "sulfur": 0,
+    "notes": "Per hit."
+  }
+]
