@@ -1,88 +1,3 @@
-<script>
-  import { browser } from '$app/environment';
-  import weapons from '$lib/weapons.json';
-
-  // --- State ---
-  let shipHP = 1000;
-  let mode = 'default'; // 'default' | 'planning'
-  let sortBy = 'hits'; // 'hits' | 'sulfur'
-  let filterCategory = 'All';
-  let planning = Object.fromEntries(weapons.map(w => [w.id, 0]));
-
-  const PRESETS = [
-    { label: 'Rowboat (est.)', hp: 400 },
-    { label: 'RHIB (est.)', hp: 500 },
-    { label: 'Tugboat (est.)', hp: 2000 },
-  ];
-
-  const CATEGORIES = ['All', ...new Set(weapons.map(w => w.category))];
-
-  // --- Computed ---
-  $: filtered = weapons.filter(w => filterCategory === 'All' || w.category === filterCategory);
-
-  $: withCalc = filtered.map(w => ({
-    ...w,
-    hitsNeeded: Math.ceil(shipHP / w.damage),
-    totalSulfur: Math.ceil(shipHP / w.damage) * w.sulfur
-  }));
-
-  $: sorted = [...withCalc].sort((a, b) => {
-    if (sortBy === 'hits') return a.hitsNeeded - b.hitsNeeded;
-    if (sortBy === 'sulfur') return a.totalSulfur - b.totalSulfur;
-    return 0;
-  });
-
-  $: planningDamage = weapons.reduce((sum, w) => sum + (planning[w.id] || 0) * w.damage, 0);
-  $: planningHPLeft = Math.max(0, shipHP - planningDamage);
-  $: planningTotalSulfur = weapons.reduce((sum, w) => sum + (planning[w.id] || 0) * w.sulfur, 0);
-  $: planningWeaponsUsed = weapons.filter(w => planning[w.id] > 0);
-  $: planningFiltered = weapons.filter(w => filterCategory === 'All' || w.category === filterCategory);
-
-  // --- URL sync ---
-  $: if (browser) syncToURL(shipHP, mode, planning);
-
-  function syncToURL(hp, m, p) {
-    const url = new URL(window.location.href);
-    url.searchParams.set('hp', hp);
-    url.searchParams.set('mode', m);
-    const picks = Object.entries(p)
-      .filter(([, v]) => v > 0)
-      .map(([k, v]) => `${k}:${v}`)
-      .join(',');
-    if (picks) url.searchParams.set('picks', picks);
-    else url.searchParams.delete('picks');
-    window.history.replaceState({}, '', url);
-  }
-
-  function loadFromURL() {
-    if (!browser) return;
-    const url = new URL(window.location.href);
-    const hp = parseInt(url.searchParams.get('hp'));
-    const m = url.searchParams.get('mode');
-    const picks = url.searchParams.get('picks');
-    if (hp && !isNaN(hp)) shipHP = hp;
-    if (m === 'planning' || m === 'default') mode = m;
-    if (picks) {
-      picks.split(',').forEach(pair => {
-        const [id, qty] = pair.split(':');
-        if (id in planning) planning[id] = parseInt(qty) || 0;
-      });
-    }
-  }
-
-  function copyShareURL() {
-    navigator.clipboard.writeText(window.location.href);
-    copied = true;
-    setTimeout(() => (copied = false), 2000);
-  }
-
-  let copied = false;
-
-  // Load from URL on mount
-  import { onMount } from 'svelte';
-  onMount(loadFromURL);
-</script>
-
 <main>
   <header>
     <div class="header-inner">
@@ -97,235 +12,24 @@
   </header>
 
   <div class="container">
+    <p class="intro">Plan your Rust raid. Enter your target's HP and find the cheapest way to destroy it.</p>
 
-    <!-- HP Input -->
-    <section class="hp-section">
-      <label for="hp-input">Ship HP</label>
-      <div class="hp-row">
-        <input
-          id="hp-input"
-          type="number"
-          min="1"
-          bind:value={shipHP}
-          placeholder="Enter ship HP..."
-        />
-        <div class="presets">
-          {#each PRESETS as preset}
-            <button class="preset-btn" on:click={() => (shipHP = preset.hp)}>
-              {preset.label}
-            </button>
-          {/each}
-        </div>
+    <div class="cards">
+      <div class="card">
+        <h2>Calculator</h2>
+        <p>Enter ship HP and see every weapon's damage per hit, hits needed, and total sulfur cost. Good for quick lookups.</p>
+        <a class="card-btn" href="/calculator">Open Calculator →</a>
       </div>
-      <p class="hp-note">⚠️ Presets are estimates. Enter actual HP for accurate results.</p>
-    </section>
-
-    <!-- Mode Tabs -->
-    <div class="tabs">
-      <button
-        class="tab {mode === 'default' ? 'active' : ''}"
-        on:click={() => (mode = 'default')}
-      >
-        Default
-      </button>
-      <button
-        class="tab {mode === 'planning' ? 'active' : ''}"
-        on:click={() => (mode = 'planning')}
-      >
-        Planning
-      </button>
-      <button class="share-btn" on:click={copyShareURL}>
-        {copied ? '✓ Copied!' : '🔗 Share'}
-      </button>
+      <div class="card">
+        <h2>Planner</h2>
+        <p>Pick weapons and quantities to build a raid plan. Shows total damage, HP remaining, and suggests the cheapest weapons to cover any gap.</p>
+        <a class="card-btn" href="/planner">Open Planner →</a>
+      </div>
     </div>
-
-    <!-- Filters & Sort -->
-    <div class="controls">
-      <div class="filter-group">
-        {#each CATEGORIES as cat}
-          <button
-            class="filter-btn {filterCategory === cat ? 'active' : ''}"
-            on:click={() => (filterCategory = cat)}
-          >
-            {cat}
-          </button>
-        {/each}
-      </div>
-      {#if mode === 'default'}
-        <div class="sort-group">
-          <span class="sort-label">Sort:</span>
-          <button class="sort-btn {sortBy === 'hits' ? 'active' : ''}" on:click={() => (sortBy = 'hits')}>Hits</button>
-          <button class="sort-btn {sortBy === 'sulfur' ? 'active' : ''}" on:click={() => (sortBy = 'sulfur')}>Sulfur</button>
-        </div>
-      {/if}
-    </div>
-
-    <!-- DEFAULT MODE -->
-    {#if mode === 'default'}
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Weapon</th>
-              <th>Category</th>
-              <th>Dmg / Hit</th>
-              <th>Hits to Sink</th>
-              <th>Total Sulfur</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each sorted as w}
-              <tr>
-                <td class="weapon-name">{w.name}</td>
-                <td><span class="badge {w.category.toLowerCase()}">{w.category}</span></td>
-                <td class="num">{w.damage}</td>
-                <td class="num hits">{w.hitsNeeded}</td>
-                <td class="num sulfur">{w.sulfur === 0 ? '—' : w.totalSulfur.toLocaleString()}</td>
-                <td class="notes">{w.notes}</td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-
-    <!-- PLANNING MODE -->
-    {:else}
-      <div class="planning-layout">
-        <div class="planning-table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Weapon</th>
-                <th>Category</th>
-                <th>Dmg / Hit</th>
-                <th>Quantity</th>
-                <th>Total Dmg</th>
-              </tr>
-            </thead>
-            <tbody>
-              {#each planningFiltered as w}
-                <tr class={planning[w.id] > 0 ? 'selected-row' : ''}>
-                  <td class="weapon-name">{w.name}</td>
-                  <td><span class="badge {w.category.toLowerCase()}">{w.category}</span></td>
-                  <td class="num">{w.damage}</td>
-                  <td class="qty-cell">
-                    <button class="qty-btn" on:click={() => planning[w.id] = Math.max(0, (planning[w.id] || 0) - 1)}>−</button>
-                    <input
-                      class="qty-input"
-                      type="number"
-                      min="0"
-                      bind:value={planning[w.id]}
-                    />
-                    <button class="qty-btn" on:click={() => planning[w.id] = (planning[w.id] || 0) + 1}>+</button>
-                  </td>
-                  <td class="num {planning[w.id] > 0 ? 'dmg-positive' : ''}">
-                    {planning[w.id] > 0 ? (planning[w.id] * w.damage).toLocaleString() : '—'}
-                  </td>
-                </tr>
-              {/each}
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Planning Result -->
-        <div class="result-panel">
-          <h2>Result</h2>
-
-          {#if planningWeaponsUsed.length === 0}
-            <p class="result-empty">Add weapons to see the result.</p>
-          {:else}
-            <div class="result-stats">
-              <div class="stat">
-                <span class="stat-label">Ship HP</span>
-                <span class="stat-value">{shipHP.toLocaleString()}</span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">Total Damage</span>
-                <span class="stat-value dmg">{planningDamage.toLocaleString()}</span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">HP Remaining</span>
-                <span class="stat-value {planningHPLeft === 0 ? 'sunk' : 'remaining'}">
-                  {planningHPLeft === 0 ? '💀 SUNK' : planningHPLeft.toLocaleString()}
-                </span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">Total Sulfur</span>
-                <span class="stat-value">{planningTotalSulfur.toLocaleString()}</span>
-              </div>
-            </div>
-
-            <!-- HP Bar -->
-            <div class="hp-bar-wrap">
-              <div class="hp-bar">
-                <div
-                  class="hp-bar-fill {planningHPLeft === 0 ? 'full-dmg' : ''}"
-                  style="width: {Math.min(100, (planningDamage / shipHP) * 100)}%"
-                ></div>
-              </div>
-              <div class="hp-bar-labels">
-                <span>0</span>
-                <span>{shipHP.toLocaleString()}</span>
-              </div>
-            </div>
-
-            {#if planningHPLeft > 0}
-              <div class="shortfall">
-                <p>Still need <strong>{planningHPLeft.toLocaleString()} more damage</strong> to sink.</p>
-                <p class="shortfall-hint">Cheapest options to cover the gap:</p>
-                <ul>
-                  {#each [...weapons].sort((a, b) => {
-                    const costA = a.sulfur > 0 ? (Math.ceil(planningHPLeft / a.damage) * a.sulfur) : Infinity;
-                    const costB = b.sulfur > 0 ? (Math.ceil(planningHPLeft / b.damage) * b.sulfur) : Infinity;
-                    return costA - costB;
-                  }).slice(0, 3) as w}
-                    <li>
-                      <span class="w-name">{w.name}</span>
-                      — {Math.ceil(planningHPLeft / w.damage)} more
-                      {w.sulfur > 0 ? `(${(Math.ceil(planningHPLeft / w.damage) * w.sulfur).toLocaleString()} sulfur)` : '(no sulfur cost)'}
-                    </li>
-                  {/each}
-                </ul>
-              </div>
-            {/if}
-
-            <!-- Weapons used summary -->
-            <div class="weapons-used">
-              <h3>Weapons in plan</h3>
-              {#each planningWeaponsUsed as w}
-                <div class="used-row">
-                  <span>{w.name}</span>
-                  <span class="used-qty">×{planning[w.id]}</span>
-                </div>
-              {/each}
-            </div>
-          {/if}
-
-          <button class="reset-btn" on:click={() => {
-            planning = Object.fromEntries(weapons.map(w => [w.id, 0]));
-          }}>Reset Plan</button>
-        </div>
-      </div>
-    {/if}
-
-    <footer>
-      <p>Damage values are community-verified estimates. <strong>Always double-check in-game.</strong></p>
-      <p>Missing a weapon or found wrong data? <a href="https://github.com/" target="_blank">Open an issue on GitHub</a>.</p>
-    </footer>
   </div>
 </main>
 
 <style>
-  :global(*, *::before, *::after) { box-sizing: border-box; margin: 0; padding: 0; }
-  :global(body) {
-    background: #111;
-    color: #e2e2e2;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    min-height: 100vh;
-  }
-
-  /* Header */
   header {
     background: #1a1a1a;
     border-bottom: 2px solid #c2440a;
@@ -357,220 +61,48 @@
   }
   .coffee-btn:hover { background: #e8500a; }
 
-  /* Layout */
   .container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 1.5rem 1rem 3rem;
+    padding: 3rem 1rem;
   }
 
-  /* HP Section */
-  .hp-section { margin-bottom: 1.5rem; }
-  label { display: block; color: #aaa; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
-  .hp-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-  input[type="number"] {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 1.1rem;
-    padding: 0.5rem 0.75rem;
-    width: 160px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  input[type="number"]:focus { border-color: #c2440a; }
-  .presets { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-  .preset-btn {
-    background: #252525;
-    border: 1px solid #333;
-    border-radius: 5px;
-    color: #bbb;
-    font-size: 0.78rem;
-    padding: 0.4rem 0.7rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .preset-btn:hover { border-color: #c2440a; color: #e8500a; }
-  .hp-note { font-size: 0.75rem; color: #555; margin-top: 0.5rem; }
-
-  /* Tabs */
-  .tabs { display: flex; gap: 0.4rem; margin-bottom: 1rem; align-items: center; }
-  .tab {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 6px;
-    color: #999;
-    font-size: 0.9rem;
-    font-weight: 600;
-    padding: 0.45rem 1.2rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .tab.active { background: #c2440a; border-color: #c2440a; color: #fff; }
-  .tab:hover:not(.active) { border-color: #c2440a; color: #e8500a; }
-  .share-btn {
-    margin-left: auto;
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 6px;
-    color: #999;
-    font-size: 0.82rem;
-    padding: 0.4rem 0.9rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .share-btn:hover { border-color: #c2440a; color: #e8500a; }
-
-  /* Controls */
-  .controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .filter-group, .sort-group { display: flex; gap: 0.35rem; align-items: center; flex-wrap: wrap; }
-  .filter-btn, .sort-btn {
-    background: #1e1e1e;
-    border: 1px solid #2a2a2a;
-    border-radius: 4px;
+  .intro {
     color: #888;
-    font-size: 0.78rem;
-    padding: 0.3rem 0.65rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .filter-btn.active, .sort-btn.active { background: #2d1a10; border-color: #c2440a; color: #e8500a; }
-  .filter-btn:hover:not(.active), .sort-btn:hover:not(.active) { border-color: #555; color: #ccc; }
-  .sort-label { color: #555; font-size: 0.78rem; }
-
-  /* Table */
-  .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-  thead tr { border-bottom: 1px solid #2a2a2a; }
-  th {
-    color: #666;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 0.6rem 0.75rem;
-    text-align: left;
-  }
-  td { padding: 0.65rem 0.75rem; border-bottom: 1px solid #1e1e1e; }
-  tr:hover td { background: #181818; }
-  .weapon-name { font-weight: 500; color: #ddd; }
-  .num { text-align: right; font-variant-numeric: tabular-nums; }
-  .hits { color: #e8500a; font-weight: 700; font-size: 0.95rem; }
-  .sulfur { color: #f0c040; }
-  .notes { color: #555; font-size: 0.78rem; max-width: 200px; }
-
-  /* Badges */
-  .badge {
-    display: inline-block;
-    border-radius: 4px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 0.15rem 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-  .badge.submarine { background: #0a2a4a; color: #4ab0f0; }
-  .badge.explosive  { background: #3a1a0a; color: #f07040; }
-  .badge.incendiary { background: #2a1a00; color: #f0a020; }
-  .badge.melee      { background: #1a2a1a; color: #60c060; }
-
-  /* Planning Layout */
-  .planning-layout { display: grid; grid-template-columns: 1fr 300px; gap: 1.5rem; align-items: start; }
-  @media (max-width: 780px) { .planning-layout { grid-template-columns: 1fr; } }
-
-  .planning-table-wrap { overflow-x: auto; }
-  .selected-row td { background: #1a1206; }
-  .qty-cell { display: flex; align-items: center; gap: 0.3rem; }
-  .qty-btn {
-    background: #252525;
-    border: 1px solid #333;
-    border-radius: 4px;
-    color: #ccc;
     font-size: 1rem;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.12s;
+    margin-bottom: 2rem;
   }
-  .qty-btn:hover { border-color: #c2440a; color: #e8500a; }
-  .qty-input {
-    width: 52px;
-    text-align: center;
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 0.9rem;
-    padding: 0.25rem 0.3rem;
-  }
-  .dmg-positive { color: #e8500a; font-weight: 700; }
 
-  /* Result Panel */
-  .result-panel {
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+
+  .card {
     background: #1a1a1a;
     border: 1px solid #2a2a2a;
-    border-radius: 8px;
-    padding: 1.25rem;
-    position: sticky;
-    top: 1rem;
+    border-radius: 10px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
-  .result-panel h2 { font-size: 1rem; color: #aaa; margin-bottom: 1rem; }
-  .result-empty { color: #444; font-size: 0.85rem; }
-  .result-stats { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1rem; }
-  .stat { display: flex; justify-content: space-between; align-items: baseline; }
-  .stat-label { color: #666; font-size: 0.8rem; }
-  .stat-value { font-weight: 700; font-size: 1rem; }
-  .stat-value.dmg { color: #e8500a; }
-  .stat-value.sunk { color: #4caf50; }
-  .stat-value.remaining { color: #f0c040; }
-
-  /* HP Bar */
-  .hp-bar-wrap { margin-bottom: 1rem; }
-  .hp-bar { height: 10px; background: #2a2a2a; border-radius: 99px; overflow: hidden; margin-bottom: 0.25rem; }
-  .hp-bar-fill { height: 100%; background: #c2440a; border-radius: 99px; transition: width 0.2s; }
-  .hp-bar-fill.full-dmg { background: #4caf50; }
-  .hp-bar-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: #444; }
-
-  /* Shortfall */
-  .shortfall { background: #1e1206; border: 1px solid #3a2010; border-radius: 6px; padding: 0.75rem; margin-bottom: 1rem; font-size: 0.82rem; }
-  .shortfall p { color: #bbb; margin-bottom: 0.4rem; }
-  .shortfall-hint { color: #888; font-size: 0.78rem; }
-  .shortfall ul { list-style: none; margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.3rem; }
-  .shortfall li { color: #aaa; }
-  .w-name { color: #e8500a; font-weight: 600; }
-
-  /* Weapons Used */
-  .weapons-used { margin-bottom: 1rem; }
-  .weapons-used h3 { font-size: 0.78rem; color: #555; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
-  .used-row { display: flex; justify-content: space-between; font-size: 0.83rem; color: #aaa; padding: 0.2rem 0; border-bottom: 1px solid #1e1e1e; }
-  .used-qty { color: #e8500a; font-weight: 700; }
-
-  .reset-btn {
-    width: 100%;
-    background: #1e1e1e;
-    border: 1px solid #333;
+  .card h2 { font-size: 1.2rem; color: #e8500a; font-weight: 700; }
+  .card p { color: #888; font-size: 0.88rem; line-height: 1.6; flex: 1; }
+  .card-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: #c2440a;
+    color: #fff;
     border-radius: 6px;
-    color: #888;
-    font-size: 0.82rem;
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: all 0.15s;
+    padding: 0.55rem 1.2rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s;
+    align-self: flex-start;
   }
-  .reset-btn:hover { border-color: #c2440a; color: #e8500a; }
-
-  /* Footer */
-  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #1e1e1e; color: #444; font-size: 0.78rem; line-height: 1.7; }
-  footer a { color: #c2440a; text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
+  .card-btn:hover { background: #e8500a; }
 </style>
