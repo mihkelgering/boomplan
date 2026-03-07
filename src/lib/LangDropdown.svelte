@@ -28,7 +28,7 @@
 
 <svelte:window on:click={handleWindowClick} on:keydown={handleKeydown} />
 
-<div class="lang-dropdown" on:click|stopPropagation>
+<div class="lang-dropdown" role="none" on:click|stopPropagation on:keydown|stopPropagation>
   <button class="lang-trigger" on:click={toggle} aria-haspopup="listbox" aria-expanded={open} aria-label="Select language: {current.label}">
     {current.flag} {current.code.toUpperCase()} {open ? '▲' : '▼'}
   </button>
