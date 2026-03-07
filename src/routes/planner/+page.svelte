@@ -65,7 +65,7 @@
     <div class="header-inner">
       <div class="title-group">
         <a class="back-link" href="/">← Back</a>
-        <h1>💥 BoomPlan</h1>
+        <a href="/" class="logo-link"><h1>💥 BoomPlan</h1></a>
         <span class="subtitle">Planner</span>
       </div>
       <a class="coffee-btn" href="https://buymeacoffee.com/mihkelgerih" target="_blank" rel="noopener">
@@ -259,6 +259,7 @@
   .back-link { color: #666; font-size: 0.85rem; text-decoration: none; transition: color 0.15s; }
   .back-link:hover { color: #e8500a; }
   h1 { font-size: 1.5rem; color: #e8500a; font-weight: 700; }
+  .logo-link { text-decoration: none; }
   .subtitle { color: #777; font-size: 0.85rem; }
   .coffee-btn {
     background: #c2440a;
