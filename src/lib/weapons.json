@@ -40,6 +40,14 @@
     "notes": "Per bullet."
   },
   {
+    "id": "cannon",
+    "name": "Cannon",
+    "category": "Explosive",
+    "damage": 50,
+    "sulfur": 0,
+    "notes": "Added in naval update. Verify sulfur cost in-game."
+  },
+  {
     "id": "incendiary_rocket",
     "name": "Incendiary Rocket",
     "category": "Incendiary",
