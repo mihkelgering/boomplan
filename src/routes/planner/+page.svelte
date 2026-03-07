@@ -2,15 +2,17 @@
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
   import weapons from '$lib/weapons.json';
+  import { t, initLang } from '$lib/i18n.js';
+  import LangDropdown from '$lib/LangDropdown.svelte';
 
   let shipHP = 1000;
   let filterCategory = 'All';
   let planning = Object.fromEntries(weapons.map(w => [w.id, 0]));
 
   const PRESETS = [
-    { label: 'Rowboat (est.)', hp: 400 },
-    { label: 'RHIB (est.)', hp: 500 },
-    { label: 'Tugboat (est.)', hp: 2000 },
+    { key: 'preset.rowboat', hp: 400 },
+    { key: 'preset.rhib',    hp: 500 },
+    { key: 'preset.tugboat', hp: 2000 },
   ];
 
   const CATEGORIES = ['All', ...new Set(weapons.map(w => w.category))];
@@ -57,44 +59,47 @@
     setTimeout(() => (copied = false), 2000);
   }
 
-  onMount(loadFromURL);
+  onMount(() => { loadFromURL(); initLang(); });
 </script>
 
 <main>
   <header>
     <div class="header-inner">
       <div class="title-group">
-        <a class="back-link" href="/">← Back</a>
-        <a href="/" class="logo-link"><h1>💥 BoomPlan</h1></a>
-        <span class="subtitle">Planner</span>
+        <a class="back-link" href="/">{$t('nav.back')}</a>
+        <h1><a href="/" class="logo-link">💥 BoomPlan</a></h1>
+        <span class="subtitle">{$t('plan.subtitle')}</span>
       </div>
-      <a class="coffee-btn" href="https://buymeacoffee.com/mihkelgerih" target="_blank" rel="noopener">
-        ☕ Buy me a coffee
-      </a>
+      <div class="header-right">
+        <LangDropdown />
+        <a class="coffee-btn" href="https://buymeacoffee.com/mihkelgerih" target="_blank" rel="noopener">
+          {$t('nav.coffee')}
+        </a>
+      </div>
     </div>
   </header>
 
   <div class="container">
 
     <section class="hp-section">
-      <label for="hp-input">Ship HP</label>
+      <label for="hp-input">{$t('hp.label')}</label>
       <div class="hp-row">
         <input
           id="hp-input"
           type="number"
           min="1"
           bind:value={shipHP}
-          placeholder="Enter ship HP..."
+          placeholder={$t('hp.placeholder')}
         />
         <div class="presets">
           {#each PRESETS as preset}
             <button class="preset-btn" on:click={() => (shipHP = preset.hp)}>
-              {preset.label}
+              {$t(preset.key)}
             </button>
           {/each}
         </div>
       </div>
-      <p class="hp-note">⚠️ Presets are estimates. Enter actual HP for accurate results.</p>
+      <p class="hp-note">{$t('hp.note')}</p>
     </section>
 
     <div class="controls">
@@ -104,12 +109,12 @@
             class="filter-btn {filterCategory === cat ? 'active' : ''}"
             on:click={() => (filterCategory = cat)}
           >
-            {cat}
+            {cat === 'All' ? $t('category.all') : $t('category.' + cat.toLowerCase())}
           </button>
         {/each}
       </div>
       <button class="share-btn" on:click={copyShareURL}>
-        {copied ? '✓ Copied!' : '🔗 Share'}
+        {copied ? $t('share.copied') : $t('share.btn')}
       </button>
     </div>
 
@@ -118,26 +123,26 @@
         <table>
           <thead>
             <tr>
-              <th>Weapon</th>
-              <th>Category</th>
-              <th>Dmg / Hit</th>
-              <th>Quantity</th>
-              <th>Total Dmg</th>
+              <th>{$t('plan.col.weapon')}</th>
+              <th>{$t('plan.col.category')}</th>
+              <th>{$t('plan.col.dmg')}</th>
+              <th>{$t('plan.col.qty')}</th>
+              <th>{$t('plan.col.totaldmg')}</th>
             </tr>
           </thead>
           <tbody>
-            {#each planningFiltered as w}
+            {#each planningFiltered as w (w.id)}
               <tr class={planning[w.id] > 0 ? 'selected-row' : ''}>
                 <td class="weapon-name">
                   <img
                     src="/weapons/{w.id}.png"
-                    alt={w.name}
+                    alt={$t('weapon.' + w.id + '.name')}
                     class="weapon-icon"
                     on:error={e => e.currentTarget.style.display = 'none'}
                   />
-                  {w.name}
+                  {$t('weapon.' + w.id + '.name')}
                 </td>
-                <td><span class="badge {w.category.toLowerCase()}">{w.category}</span></td>
+                <td><span class="badge {w.category.toLowerCase()}">{$t('category.' + w.category.toLowerCase())}</span></td>
                 <td class="num">{w.damage}</td>
                 <td class="qty-cell">
                   <button class="qty-btn" on:click={() => planning[w.id] = Math.max(0, (planning[w.id] || 0) - 1)}>−</button>
@@ -159,28 +164,28 @@
       </div>
 
       <div class="result-panel">
-        <h2>Result</h2>
+        <h2>{$t('plan.result')}</h2>
 
         {#if planningWeaponsUsed.length === 0}
-          <p class="result-empty">Add weapons to see the result.</p>
+          <p class="result-empty">{$t('plan.empty')}</p>
         {:else}
           <div class="result-stats">
             <div class="stat">
-              <span class="stat-label">Ship HP</span>
+              <span class="stat-label">{$t('plan.stat.hp')}</span>
               <span class="stat-value">{shipHP.toLocaleString()}</span>
             </div>
             <div class="stat">
-              <span class="stat-label">Total Damage</span>
+              <span class="stat-label">{$t('plan.stat.totaldmg')}</span>
               <span class="stat-value dmg">{planningDamage.toLocaleString()}</span>
             </div>
             <div class="stat">
-              <span class="stat-label">HP Remaining</span>
+              <span class="stat-label">{$t('plan.stat.remaining')}</span>
               <span class="stat-value {planningHPLeft === 0 ? 'sunk' : 'remaining'}">
-                {planningHPLeft === 0 ? '💀 SUNK' : planningHPLeft.toLocaleString()}
+                {planningHPLeft === 0 ? $t('plan.sunk') : planningHPLeft.toLocaleString()}
               </span>
             </div>
             <div class="stat">
-              <span class="stat-label">Total Sulfur</span>
+              <span class="stat-label">{$t('plan.stat.sulfur')}</span>
               <span class="stat-value">{planningTotalSulfur.toLocaleString()}</span>
             </div>
           </div>
@@ -200,8 +205,8 @@
 
           {#if planningHPLeft > 0}
             <div class="shortfall">
-              <p>Still need <strong>{planningHPLeft.toLocaleString()} more damage</strong> to sink.</p>
-              <p class="shortfall-hint">Cheapest options to cover the gap:</p>
+              <p>{$t('plan.shortfall.pre')} <strong>{planningHPLeft.toLocaleString()}</strong> {$t('plan.shortfall.mid')}</p>
+              <p class="shortfall-hint">{$t('plan.shortfall.hint')}</p>
               <ul>
                 {#each [...weapons].sort((a, b) => {
                   const costA = a.sulfur > 0 ? (Math.ceil(planningHPLeft / a.damage) * a.sulfur) : Infinity;
@@ -209,9 +214,9 @@
                   return costA - costB;
                 }).slice(0, 3) as w}
                   <li>
-                    <span class="w-name">{w.name}</span>
-                    — {Math.ceil(planningHPLeft / w.damage)} more
-                    {w.sulfur > 0 ? `(${(Math.ceil(planningHPLeft / w.damage) * w.sulfur).toLocaleString()} sulfur)` : '(no sulfur cost)'}
+                    <span class="w-name">{$t('weapon.' + w.id + '.name')}</span>
+                    — {Math.ceil(planningHPLeft / w.damage)} {$t('plan.more')}
+                    {w.sulfur > 0 ? `(${(Math.ceil(planningHPLeft / w.damage) * w.sulfur).toLocaleString()} ${$t('plan.sulfur.unit')})` : $t('plan.no_sulfur')}
                   </li>
                 {/each}
               </ul>
@@ -219,10 +224,10 @@
           {/if}
 
           <div class="weapons-used">
-            <h3>Weapons in plan</h3>
+            <h3>{$t('plan.weapons_in_plan')}</h3>
             {#each planningWeaponsUsed as w}
               <div class="used-row">
-                <span>{w.name}</span>
+                <span>{$t('weapon.' + w.id + '.name')}</span>
                 <span class="used-qty">×{planning[w.id]}</span>
               </div>
             {/each}
@@ -231,12 +236,12 @@
 
         <button class="reset-btn" on:click={() => {
           planning = Object.fromEntries(weapons.map(w => [w.id, 0]));
-        }}>Reset Plan</button>
+        }}>{$t('plan.reset')}</button>
       </div>
     </div>
 
     <footer>
-      <p>Damage values are community-verified estimates. <strong>Always double-check in-game.</strong></p>
+      <p>{$t('plan.footer.text')} <strong>{$t('plan.footer.note')}</strong></p>
     </footer>
   </div>
 </main>
@@ -259,8 +264,9 @@
   .back-link { color: #666; font-size: 0.85rem; text-decoration: none; transition: color 0.15s; }
   .back-link:hover { color: #e8500a; }
   h1 { font-size: 1.5rem; color: #e8500a; font-weight: 700; }
-  .logo-link { text-decoration: none; }
+  .logo-link { text-decoration: none; color: inherit; }
   .subtitle { color: #777; font-size: 0.85rem; }
+  .header-right { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
   .coffee-btn {
     background: #c2440a;
     color: #fff;

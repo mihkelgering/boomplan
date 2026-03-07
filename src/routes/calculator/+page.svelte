@@ -2,15 +2,17 @@
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
   import weapons from '$lib/weapons.json';
+  import { t, initLang } from '$lib/i18n.js';
+  import LangDropdown from '$lib/LangDropdown.svelte';
 
   let shipHP = 1000;
   let sortBy = 'hits';
   let filterCategory = 'All';
 
   const PRESETS = [
-    { label: 'Rowboat (est.)', hp: 400 },
-    { label: 'RHIB (est.)', hp: 500 },
-    { label: 'Tugboat (est.)', hp: 2000 },
+    { key: 'preset.rowboat', hp: 400 },
+    { key: 'preset.rhib',    hp: 500 },
+    { key: 'preset.tugboat', hp: 2000 },
   ];
 
   const CATEGORIES = ['All', ...new Set(weapons.map(w => w.category))];
@@ -52,44 +54,47 @@
     setTimeout(() => (copied = false), 2000);
   }
 
-  onMount(loadFromURL);
+  onMount(() => { loadFromURL(); initLang(); });
 </script>
 
 <main>
   <header>
     <div class="header-inner">
       <div class="title-group">
-        <a class="back-link" href="/">← Back</a>
-        <a href="/" class="logo-link"><h1>💥 BoomPlan</h1></a>
-        <span class="subtitle">Calculator</span>
+        <a class="back-link" href="/">{$t('nav.back')}</a>
+        <h1><a href="/" class="logo-link">💥 BoomPlan</a></h1>
+        <span class="subtitle">{$t('calc.subtitle')}</span>
       </div>
-      <a class="coffee-btn" href="https://buymeacoffee.com/mihkelgerih" target="_blank" rel="noopener">
-        ☕ Buy me a coffee
-      </a>
+      <div class="header-right">
+        <LangDropdown />
+        <a class="coffee-btn" href="https://buymeacoffee.com/mihkelgerih" target="_blank" rel="noopener">
+          {$t('nav.coffee')}
+        </a>
+      </div>
     </div>
   </header>
 
   <div class="container">
 
     <section class="hp-section">
-      <label for="hp-input">Ship HP</label>
+      <label for="hp-input">{$t('hp.label')}</label>
       <div class="hp-row">
         <input
           id="hp-input"
           type="number"
           min="1"
           bind:value={shipHP}
-          placeholder="Enter ship HP..."
+          placeholder={$t('hp.placeholder')}
         />
         <div class="presets">
           {#each PRESETS as preset}
             <button class="preset-btn" on:click={() => (shipHP = preset.hp)}>
-              {preset.label}
+              {$t(preset.key)}
             </button>
           {/each}
         </div>
       </div>
-      <p class="hp-note">⚠️ Presets are estimates. Enter actual HP for accurate results.</p>
+      <p class="hp-note">{$t('hp.note')}</p>
     </section>
 
     <div class="controls">
@@ -99,18 +104,18 @@
             class="filter-btn {filterCategory === cat ? 'active' : ''}"
             on:click={() => (filterCategory = cat)}
           >
-            {cat}
+            {cat === 'All' ? $t('category.all') : $t('category.' + cat.toLowerCase())}
           </button>
         {/each}
       </div>
       <div class="right-controls">
         <div class="sort-group">
-          <span class="sort-label">Sort:</span>
-          <button class="sort-btn {sortBy === 'hits' ? 'active' : ''}" on:click={() => (sortBy = 'hits')}>Hits</button>
-          <button class="sort-btn {sortBy === 'sulfur' ? 'active' : ''}" on:click={() => (sortBy = 'sulfur')}>Sulfur</button>
+          <span class="sort-label">{$t('calc.sort.label')}</span>
+          <button class="sort-btn {sortBy === 'hits' ? 'active' : ''}" on:click={() => (sortBy = 'hits')}>{$t('calc.sort.hits')}</button>
+          <button class="sort-btn {sortBy === 'sulfur' ? 'active' : ''}" on:click={() => (sortBy = 'sulfur')}>{$t('calc.sort.sulfur')}</button>
         </div>
         <button class="share-btn" on:click={copyShareURL}>
-          {copied ? '✓ Copied!' : '🔗 Share'}
+          {copied ? $t('share.copied') : $t('share.btn')}
         </button>
       </div>
     </div>
@@ -119,31 +124,31 @@
       <table>
         <thead>
           <tr>
-            <th>Weapon</th>
-            <th>Category</th>
-            <th>Dmg / Hit</th>
-            <th>Hits to Sink</th>
-            <th>Total Sulfur</th>
-            <th>Notes</th>
+            <th>{$t('calc.col.weapon')}</th>
+            <th>{$t('calc.col.category')}</th>
+            <th>{$t('calc.col.dmg')}</th>
+            <th>{$t('calc.col.hits')}</th>
+            <th>{$t('calc.col.sulfur')}</th>
+            <th>{$t('calc.col.notes')}</th>
           </tr>
         </thead>
         <tbody>
-          {#each sorted as w}
+          {#each sorted as w (w.id)}
             <tr>
               <td class="weapon-name">
                 <img
                   src="/weapons/{w.id}.png"
-                  alt={w.name}
+                  alt={$t('weapon.' + w.id + '.name')}
                   class="weapon-icon"
                   on:error={e => e.currentTarget.style.display = 'none'}
                 />
-                {w.name}
+                {$t('weapon.' + w.id + '.name')}
               </td>
-              <td><span class="badge {w.category.toLowerCase()}">{w.category}</span></td>
+              <td><span class="badge {w.category.toLowerCase()}">{$t('category.' + w.category.toLowerCase())}</span></td>
               <td class="num">{w.damage}</td>
               <td class="num hits">{w.hitsNeeded}</td>
               <td class="num sulfur">{w.sulfur === 0 ? '—' : w.totalSulfur.toLocaleString()}</td>
-              <td class="notes">{w.notes}</td>
+              <td class="notes">{$t('weapon.' + w.id + '.notes')}</td>
             </tr>
           {/each}
         </tbody>
@@ -151,7 +156,7 @@
     </div>
 
     <footer>
-      <p>Damage values are community-verified estimates. <strong>Always double-check in-game.</strong></p>
+      <p>{$t('calc.footer.text')} <strong>{$t('calc.footer.note')}</strong></p>
     </footer>
   </div>
 </main>
@@ -174,8 +179,9 @@
   .back-link { color: #666; font-size: 0.85rem; text-decoration: none; transition: color 0.15s; }
   .back-link:hover { color: #e8500a; }
   h1 { font-size: 1.5rem; color: #e8500a; font-weight: 700; }
-  .logo-link { text-decoration: none; }
+  .logo-link { text-decoration: none; color: inherit; }
   .subtitle { color: #777; font-size: 0.85rem; }
+  .header-right { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
   .coffee-btn {
     background: #c2440a;
     color: #fff;

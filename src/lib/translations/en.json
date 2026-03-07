@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "back": "← Back",
+    "coffee": "☕ Buy me a coffee"
+  },
+  "home": {
+    "subtitle": "Rust Raid Calculator",
+    "intro": "Plan your Rust raid. Enter your target's HP and find the cheapest way to destroy it.",
+    "calc": {
+      "title": "Calculator",
+      "desc": "Enter ship HP and see every weapon's damage per hit, hits needed, and total sulfur cost. Good for quick lookups.",
+      "btn": "Open Calculator →"
+    },
+    "plan": {
+      "title": "Planner",
+      "desc": "Pick weapons and quantities to build a raid plan. Shows total damage, HP remaining, and suggests the cheapest weapons to cover any gap.",
+      "btn": "Open Planner →"
+    }
+  },
+  "hp": {
+    "label": "Ship HP",
+    "placeholder": "Enter ship HP...",
+    "note": "⚠️ Presets are estimates. Enter actual HP for accurate results."
+  },
+  "preset": {
+    "rowboat": "Rowboat (est.)",
+    "rhib": "RHIB (est.)",
+    "tugboat": "Tugboat (est.)"
+  },
+  "share": {
+    "btn": "🔗 Share",
+    "copied": "✓ Copied!"
+  },
+  "category": {
+    "all": "All",
+    "submarine": "Submarine",
+    "explosive": "Explosive",
+    "incendiary": "Incendiary",
+    "melee": "Melee"
+  },
+  "calc": {
+    "subtitle": "Calculator",
+    "sort": {
+      "label": "Sort:",
+      "hits": "Hits",
+      "sulfur": "Sulfur"
+    },
+    "col": {
+      "weapon": "Weapon",
+      "category": "Category",
+      "dmg": "Dmg / Hit",
+      "hits": "Hits to Sink",
+      "sulfur": "Total Sulfur",
+      "notes": "Notes"
+    },
+    "footer": {
+      "text": "Damage values are community-verified estimates.",
+      "note": "Always double-check in-game."
+    }
+  },
+  "plan": {
+    "subtitle": "Planner",
+    "col": {
+      "weapon": "Weapon",
+      "category": "Category",
+      "dmg": "Dmg / Hit",
+      "qty": "Quantity",
+      "totaldmg": "Total Dmg"
+    },
+    "result": "Result",
+    "empty": "Add weapons to see the result.",
+    "stat": {
+      "hp": "Ship HP",
+      "totaldmg": "Total Damage",
+      "remaining": "HP Remaining",
+      "sulfur": "Total Sulfur"
+    },
+    "sunk": "💀 SUNK",
+    "shortfall": {
+      "pre": "Still need",
+      "mid": "more damage to sink.",
+      "hint": "Cheapest options to cover the gap:"
+    },
+    "more": "more",
+    "sulfur": {
+      "unit": "sulfur"
+    },
+    "no_sulfur": "(no sulfur cost)",
+    "weapons_in_plan": "Weapons in plan",
+    "reset": "Reset Plan",
+    "footer": {
+      "text": "Damage values are community-verified estimates.",
+      "note": "Always double-check in-game."
+    }
+  },
+  "weapon": {
+    "torpedo": {
+      "name": "Torpedo",
+      "notes": "Fired from submarine torpedo tube. Sulfur cost is part of submarine build cost."
+    },
+    "c4": {
+      "name": "Timed Explosive (C4)",
+      "notes": "Must be placed directly on ship hull."
+    },
+    "rocket": {
+      "name": "Rocket",
+      "notes": ""
+    },
+    "satchel": {
+      "name": "Satchel Charge",
+      "notes": "Can be dud — may need extra."
+    },
+    "explosive_ammo": {
+      "name": "Explosive 5.56 Ammo",
+      "notes": "Per bullet."
+    },
+    "cannon": {
+      "name": "Cannon",
+      "notes": "Added in naval update. Verify sulfur cost in-game."
+    },
+    "incendiary_rocket": {
+      "name": "Incendiary Rocket",
+      "notes": "Deals fire damage over time."
+    },
+    "fire_arrow": {
+      "name": "Fire Arrow",
+      "notes": "Per arrow. Slow but cheap."
+    },
+    "chainsaw": {
+      "name": "Chainsaw",
+      "notes": "Requires low grade fuel. Per hit estimate."
+    },
+    "salvaged_axe": {
+      "name": "Salvaged Axe",
+      "notes": "Per hit."
+    },
+    "hatchet": {
+      "name": "Hatchet",
+      "notes": "Per hit."
+    },
+    "stone_hatchet": {
+      "name": "Stone Hatchet",
+      "notes": "Per hit. Very slow."
+    },
+    "pickaxe": {
+      "name": "Pickaxe",
+      "notes": "Per hit."
+    }
+  }
+}

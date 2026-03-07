@@ -1,29 +1,39 @@
+<script>
+  import { onMount } from 'svelte';
+  import { t, initLang } from '$lib/i18n.js';
+  import LangDropdown from '$lib/LangDropdown.svelte';
+  onMount(initLang);
+</script>
+
 <main>
   <header>
     <div class="header-inner">
       <div class="title-group">
         <h1>💥 BoomPlan</h1>
-        <span class="subtitle">Rust Raid Calculator</span>
+        <span class="subtitle">{$t('home.subtitle')}</span>
       </div>
-      <a class="coffee-btn" href="https://buymeacoffee.com/mihkelgerih" target="_blank" rel="noopener">
-        ☕ Buy me a coffee
-      </a>
+      <div class="header-right">
+        <LangDropdown />
+        <a class="coffee-btn" href="https://buymeacoffee.com/mihkelgerih" target="_blank" rel="noopener">
+          {$t('nav.coffee')}
+        </a>
+      </div>
     </div>
   </header>
 
   <div class="container">
-    <p class="intro">Plan your Rust raid. Enter your target's HP and find the cheapest way to destroy it.</p>
+    <p class="intro">{$t('home.intro')}</p>
 
     <div class="cards">
       <div class="card">
-        <h2>Calculator</h2>
-        <p>Enter ship HP and see every weapon's damage per hit, hits needed, and total sulfur cost. Good for quick lookups.</p>
-        <a class="card-btn" href="/calculator">Open Calculator →</a>
+        <h2>{$t('home.calc.title')}</h2>
+        <p>{$t('home.calc.desc')}</p>
+        <a class="card-btn" href="/calculator">{$t('home.calc.btn')}</a>
       </div>
       <div class="card">
-        <h2>Planner</h2>
-        <p>Pick weapons and quantities to build a raid plan. Shows total damage, HP remaining, and suggests the cheapest weapons to cover any gap.</p>
-        <a class="card-btn" href="/planner">Open Planner →</a>
+        <h2>{$t('home.plan.title')}</h2>
+        <p>{$t('home.plan.desc')}</p>
+        <a class="card-btn" href="/planner">{$t('home.plan.btn')}</a>
       </div>
     </div>
   </div>
@@ -46,6 +56,7 @@
   .title-group { display: flex; align-items: baseline; gap: 0.75rem; }
   h1 { font-size: 1.5rem; color: #e8500a; font-weight: 700; }
   .subtitle { color: #777; font-size: 0.85rem; }
+  .header-right { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
   .coffee-btn {
     background: #c2440a;
     color: #fff;

@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "back": "← Tagasi",
+    "coffee": "☕ Osta mulle kohvi"
+  },
+  "home": {
+    "subtitle": "Rust Rünnaku Kalkulaator",
+    "intro": "Planeeri oma Rust rünnakut. Sisesta sihtmärgi HP ja leia odavaim viis selle hävitamiseks.",
+    "calc": {
+      "title": "Kalkulaator",
+      "desc": "Sisesta laeva HP ja vaata iga relva kahjustust löögi kohta, vajalike löökide arvu ja väävli kogukulu. Mugav kiirete päringute jaoks.",
+      "btn": "Ava kalkulaator →"
+    },
+    "plan": {
+      "title": "Planeerija",
+      "desc": "Vali relvad ja kogused rünnakuplaani koostamiseks. Näitab kogukahju, järelejäänud HP-d ja soovitab odavaimad relvad ülejäänud lünga katmiseks.",
+      "btn": "Ava planeerija →"
+    }
+  },
+  "hp": {
+    "label": "Laeva HP",
+    "placeholder": "Sisesta laeva HP...",
+    "note": "⚠️ Eelhäälestused on hinnangulised. Sisesta tegelik HP täpsete tulemuste saamiseks."
+  },
+  "preset": {
+    "rowboat": "Paat (hinnang)",
+    "rhib": "RHIB (hinnang)",
+    "tugboat": "Puksiir (hinnang)"
+  },
+  "share": {
+    "btn": "🔗 Jaga",
+    "copied": "✓ Kopeeritud!"
+  },
+  "category": {
+    "all": "Kõik",
+    "submarine": "Allveelaev",
+    "explosive": "Lõhkeaine",
+    "incendiary": "Süütav",
+    "melee": "Lähivõitlus"
+  },
+  "calc": {
+    "subtitle": "Kalkulaator",
+    "sort": {
+      "label": "Sorteeri:",
+      "hits": "Löögid",
+      "sulfur": "Väävel"
+    },
+    "col": {
+      "weapon": "Relv",
+      "category": "Kategooria",
+      "dmg": "Kahju/Löök",
+      "hits": "Lööke uputamiseks",
+      "sulfur": "Väävlit kokku",
+      "notes": "Märkused"
+    },
+    "footer": {
+      "text": "Kahjustuste väärtused on kogukonna poolt kontrollitud hinnangud.",
+      "note": "Kontrolli alati mängus."
+    }
+  },
+  "plan": {
+    "subtitle": "Planeerija",
+    "col": {
+      "weapon": "Relv",
+      "category": "Kategooria",
+      "dmg": "Kahju/Löök",
+      "qty": "Kogus",
+      "totaldmg": "Kogukahju"
+    },
+    "result": "Tulemus",
+    "empty": "Lisa relvad tulemuse nägemiseks.",
+    "stat": {
+      "hp": "Laeva HP",
+      "totaldmg": "Kogukahju",
+      "remaining": "HP järel",
+      "sulfur": "Väävlit kokku"
+    },
+    "sunk": "💀 UPUTATUD",
+    "shortfall": {
+      "pre": "Vaja veel",
+      "mid": "kahjustust uputamiseks.",
+      "hint": "Odavaimad variandid lünga katmiseks:"
+    },
+    "more": "tk",
+    "sulfur": {
+      "unit": "väävlit"
+    },
+    "no_sulfur": "(väävlita)",
+    "weapons_in_plan": "Relvad plaanis",
+    "reset": "Lähtesta plaan",
+    "footer": {
+      "text": "Kahjustuste väärtused on kogukonna poolt kontrollitud hinnangud.",
+      "note": "Kontrolli alati mängus."
+    }
+  },
+  "weapon": {
+    "torpedo": {
+      "name": "Torpedo",
+      "notes": "Tulistatakse allveelaeva torpeedotorust. Väävli kulu sisaldub allveelaeva ehituskuludes."
+    },
+    "c4": {
+      "name": "Ajastatud lõhkekeha (C4)",
+      "notes": "Tuleb kinnitada otse laeva kere külge."
+    },
+    "rocket": {
+      "name": "Rakett",
+      "notes": ""
+    },
+    "satchel": {
+      "name": "Kotilõhkekeha",
+      "notes": "Võib olla rike — võta varuks."
+    },
+    "explosive_ammo": {
+      "name": "Lõhkev 5.56 padrun",
+      "notes": "Ühe kuuli kohta."
+    },
+    "cannon": {
+      "name": "Kahur",
+      "notes": "Lisati merevärsenduses. Kontrolli väävli hinda mängus."
+    },
+    "incendiary_rocket": {
+      "name": "Süüterakett",
+      "notes": "Tekitab tulekahju aja jooksul."
+    },
+    "fire_arrow": {
+      "name": "Tulinool",
+      "notes": "Ühe noole kohta. Aeglane, kuid odav."
+    },
+    "chainsaw": {
+      "name": "Mootorsaag",
+      "notes": "Vajab madala kvaliteediga kütust. Löögikahju hinnang."
+    },
+    "salvaged_axe": {
+      "name": "Leitud kirves",
+      "notes": "Löögi kohta."
+    },
+    "hatchet": {
+      "name": "Kirves",
+      "notes": "Löögi kohta."
+    },
+    "stone_hatchet": {
+      "name": "Kivikirves",
+      "notes": "Löögi kohta. Väga aeglane."
+    },
+    "pickaxe": {
+      "name": "Kirveshaak",
+      "notes": "Löögi kohta."
+    }
+  }
+}
