@@ -101,9 +101,9 @@
     "id": "pickaxe",
     "name": "Pickaxe",
     "category": "Melee",
-    "damage": 29.2,
-    "damagePerHit": 0.5,
-    "hitsInTotal": 58,
+    "damage": 0.5,
+    "totalDamage": 29.2,
+    "totalHits": 58,
     "sulfur": 0,
     "notes": "Per hit."
   },
@@ -167,9 +167,9 @@
     "id": "machete",
     "name": "Machete",
     "category": "Melee",
-    "damage": 27.5,
-    "damagePerHit": 1.2,
-    "hitsInTotal": 22,
+    "damage": 1.2,
+    "totalDamage": 27.5,
+    "totalHits": 22,
     "sulfur": 0,
     "notes": "Per hit."
   },
@@ -211,9 +211,9 @@
     "id": "salvaged_hammer",
     "name": "Salvaged Hammer",
     "category": "Melee",
-    "damage": 68.9,
-    "damagePerHit": 1.2,
-    "hitsInTotal": 57,
+    "damage": 1.2,
+    "totalDamage": 68.9,
+    "totalHits": 57,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   }
