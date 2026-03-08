@@ -3,7 +3,7 @@
     "id": "torpedo",
     "name": "Torpedo",
     "category": "Submarine",
-    "damage": 350,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Fired from submarine torpedo tube. Sulfur cost is part of submarine build cost."
   },
@@ -19,7 +19,7 @@
     "id": "rocket",
     "name": "Rocket",
     "category": "Explosive",
-    "damage": 175,
+    "damage": 0,
     "sulfur": 1400,
     "notes": ""
   },
@@ -27,7 +27,7 @@
     "id": "satchel",
     "name": "Satchel Charge",
     "category": "Explosive",
-    "damage": 75,
+    "damage": 0,
     "sulfur": 480,
     "notes": "Can be dud — may need extra."
   },
@@ -35,7 +35,7 @@
     "id": "explosive_ammo",
     "name": "Explosive 5.56 Ammo",
     "category": "Explosive",
-    "damage": 26,
+    "damage": 0,
     "sulfur": 25,
     "notes": "Per bullet."
   },
@@ -51,7 +51,7 @@
     "id": "incendiary_rocket",
     "name": "Incendiary Rocket",
     "category": "Incendiary",
-    "damage": 120,
+    "damage": 0,
     "sulfur": 1400,
     "notes": "Deals fire damage over time."
   },
@@ -59,7 +59,7 @@
     "id": "fire_arrow",
     "name": "Fire Arrow",
     "category": "Incendiary",
-    "damage": 15,
+    "damage": 0,
     "sulfur": 10,
     "notes": "Per arrow. Slow but cheap."
   },
@@ -67,7 +67,7 @@
     "id": "chainsaw",
     "name": "Chainsaw",
     "category": "Melee",
-    "damage": 45,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Requires low grade fuel. Per hit estimate."
   },
@@ -75,7 +75,7 @@
     "id": "salvaged_axe",
     "name": "Salvaged Axe",
     "category": "Melee",
-    "damage": 35,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit."
   },
@@ -93,7 +93,7 @@
     "id": "stone_hatchet",
     "name": "Stone Hatchet",
     "category": "Melee",
-    "damage": 10,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Very slow."
   },
@@ -111,7 +111,7 @@
     "id": "rock",
     "name": "Rock",
     "category": "Melee",
-    "damage": 5,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Starter item. Per hit. Placeholder — verify in-game."
   },
@@ -119,7 +119,7 @@
     "id": "bone_club",
     "name": "Bone Club",
     "category": "Melee",
-    "damage": 8,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   },
@@ -127,7 +127,7 @@
     "id": "bone_knife",
     "name": "Bone Knife",
     "category": "Melee",
-    "damage": 5,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   },
@@ -135,7 +135,7 @@
     "id": "hunting_knife",
     "name": "Hunting Knife",
     "category": "Melee",
-    "damage": 8,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   },
@@ -143,7 +143,7 @@
     "id": "combat_knife",
     "name": "Combat Knife",
     "category": "Melee",
-    "damage": 10,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   },
@@ -151,7 +151,7 @@
     "id": "wooden_spear",
     "name": "Wooden Spear",
     "category": "Melee",
-    "damage": 8,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   },
@@ -159,7 +159,7 @@
     "id": "stone_spear",
     "name": "Stone Spear",
     "category": "Melee",
-    "damage": 12,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   },
@@ -177,7 +177,7 @@
     "id": "mace",
     "name": "Mace",
     "category": "Melee",
-    "damage": 18,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   },
@@ -185,9 +185,9 @@
     "id": "salvaged_cleaver",
     "name": "Salvaged Cleaver",
     "category": "Melee",
-    "damage": 68.9,
-    "damagePerHit": 1.2,
-    "hitsInTotal": 57,
+    "damage": 0,
+    "damagePerHit": 0,
+    "hitsInTotal": 0,
     "sulfur": 0,
     "notes": ""
   },
@@ -195,7 +195,7 @@
     "id": "salvaged_sword",
     "name": "Salvaged Sword",
     "category": "Melee",
-    "damage": 22,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   },
@@ -203,7 +203,7 @@
     "id": "longsword",
     "name": "Longsword",
     "category": "Melee",
-    "damage": 28,
+    "damage": 0,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   },
@@ -211,7 +211,9 @@
     "id": "salvaged_hammer",
     "name": "Salvaged Hammer",
     "category": "Melee",
-    "damage": 25,
+    "damage": 68.9,
+    "damagePerHit": 1.2,
+    "hitsInTotal": 57,
     "sulfur": 0,
     "notes": "Per hit. Placeholder — verify in-game."
   }
