@@ -167,9 +167,11 @@
     "id": "machete",
     "name": "Machete",
     "category": "Melee",
-    "damage": 15,
+    "damage": 27.5,
+    "damagePerHit": 1.2,
+    "hitsInTotal": 22,
     "sulfur": 0,
-    "notes": "Per hit. Placeholder — verify in-game."
+    "notes": "Per hit."
   },
   {
     "id": "mace",
