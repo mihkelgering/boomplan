@@ -136,7 +136,7 @@
               <tr class={planning[w.id] > 0 ? 'selected-row' : ''}>
                 <td class="weapon-name">
                   <img
-                    src="/weapons/{w.id}.png"
+                    src="{base}/weapons/{w.id}.png"
                     alt={$t('weapon.' + w.id + '.name')}
                     class="weapon-icon"
                     on:error={e => e.currentTarget.style.display = 'none'}
