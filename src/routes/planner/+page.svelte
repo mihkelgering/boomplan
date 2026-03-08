@@ -2,6 +2,7 @@
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
   import weapons from '$lib/weapons.json';
+  import { base } from '$app/paths';
   import { t, initLang } from '$lib/i18n.js';
   import LangDropdown from '$lib/LangDropdown.svelte';
 
@@ -66,8 +67,8 @@
   <header>
     <div class="header-inner">
       <div class="title-group">
-        <a class="back-link" href="/">{$t('nav.back')}</a>
-        <h1><a href="/" class="logo-link">💥 BoomPlan</a></h1>
+        <a class="back-link" href="{base}/">{$t('nav.back')}</a>
+        <h1><a href="{base}/" class="logo-link">💥 BoomPlan</a></h1>
         <span class="subtitle">{$t('plan.subtitle')}</span>
       </div>
       <div class="header-right">

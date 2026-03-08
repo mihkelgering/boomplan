@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { base } from '$app/paths';
   import { t, initLang } from '$lib/i18n.js';
   import LangDropdown from '$lib/LangDropdown.svelte';
   onMount(initLang);
@@ -28,12 +29,12 @@
       <div class="card">
         <h2>{$t('home.calc.title')}</h2>
         <p>{$t('home.calc.desc')}</p>
-        <a class="card-btn" href="/calculator">{$t('home.calc.btn')}</a>
+        <a class="card-btn" href="{base}/calculator">{$t('home.calc.btn')}</a>
       </div>
       <div class="card">
         <h2>{$t('home.plan.title')}</h2>
         <p>{$t('home.plan.desc')}</p>
-        <a class="card-btn" href="/planner">{$t('home.plan.btn')}</a>
+        <a class="card-btn" href="{base}/planner">{$t('home.plan.btn')}</a>
       </div>
     </div>
   </div>
