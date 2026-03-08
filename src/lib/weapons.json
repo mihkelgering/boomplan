@@ -11,7 +11,7 @@
     "id": "c4",
     "name": "Timed Explosive (C4)",
     "category": "Explosive",
-    "damage": 275,
+    "damage": 495,
     "sulfur": 2200,
     "notes": "Must be placed directly on ship hull."
   },
@@ -83,7 +83,9 @@
     "id": "hatchet",
     "name": "Hatchet",
     "category": "Melee",
-    "damage": 25,
+    "damage": 51,
+    "damagePerHit": 1.46,
+    "hitsInTotal": 35,
     "sulfur": 0,
     "notes": "Per hit."
   },
@@ -99,7 +101,9 @@
     "id": "pickaxe",
     "name": "Pickaxe",
     "category": "Melee",
-    "damage": 20,
+    "damage": 29.2,
+    "damagePerHit": 0.5,
+    "hitsInTotal": 58,
     "sulfur": 0,
     "notes": "Per hit."
   },
@@ -179,9 +183,11 @@
     "id": "salvaged_cleaver",
     "name": "Salvaged Cleaver",
     "category": "Melee",
-    "damage": 20,
+    "damage": 68.9,
+    "damagePerHit": 1.2,
+    "hitsInTotal": 57,
     "sulfur": 0,
-    "notes": "Per hit. Placeholder — verify in-game."
+    "notes": ""
   },
   {
     "id": "salvaged_sword",
