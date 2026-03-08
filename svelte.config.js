@@ -11,7 +11,6 @@ const config = {
         paths: {
             base: '/boomplan'
         },
-        trailingSlash: 'always'
     }
 };
 
