@@ -83,8 +83,8 @@
     "id": "hatchet",
     "name": "Hatchet",
     "category": "Melee",
-    "damage": 51,
-    "damagePerHit": 1.46,
+    "damage": 1.46,
+    "damagePerHit": 51,
     "hitsInTotal": 35,
     "sulfur": 0,
     "notes": "Per hit."
@@ -93,7 +93,9 @@
     "id": "stone_hatchet",
     "name": "Stone Hatchet",
     "category": "Melee",
-    "damage": 0,
+    "damage": 1.2,
+    "damagePerHit": 12.3,
+    "hitsInTotal": 10,
     "sulfur": 0,
     "notes": "Per hit. Very slow."
   },
