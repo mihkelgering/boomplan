@@ -145,6 +145,58 @@
     "pickaxe": {
       "name": "Kirveshaak",
       "notes": "Löögi kohta."
+    },
+    "rock": {
+      "name": "Kivi",
+      "notes": "Algusese ese. Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "bone_club": {
+      "name": "Luunui",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "bone_knife": {
+      "name": "Luunuga",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "hunting_knife": {
+      "name": "Jahimehe nuga",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "combat_knife": {
+      "name": "Lahingünuga",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "wooden_spear": {
+      "name": "Puust oda",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "stone_spear": {
+      "name": "Kivist oda",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "machete": {
+      "name": "Mačete",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "mace": {
+      "name": "Nuia",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "salvaged_cleaver": {
+      "name": "Leitud lõikur",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "salvaged_sword": {
+      "name": "Leitud mõõk",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "longsword": {
+      "name": "Pikk mõõk",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
+    },
+    "salvaged_hammer": {
+      "name": "Leitud haamer",
+      "notes": "Löögi kohta. Kohatäide — kontrolli mängus."
     }
   }
 }

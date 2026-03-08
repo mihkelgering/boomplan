@@ -102,5 +102,109 @@
     "damage": 20,
     "sulfur": 0,
     "notes": "Per hit."
+  },
+  {
+    "id": "rock",
+    "name": "Rock",
+    "category": "Melee",
+    "damage": 5,
+    "sulfur": 0,
+    "notes": "Starter item. Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "bone_club",
+    "name": "Bone Club",
+    "category": "Melee",
+    "damage": 8,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "bone_knife",
+    "name": "Bone Knife",
+    "category": "Melee",
+    "damage": 5,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "hunting_knife",
+    "name": "Hunting Knife",
+    "category": "Melee",
+    "damage": 8,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "combat_knife",
+    "name": "Combat Knife",
+    "category": "Melee",
+    "damage": 10,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "wooden_spear",
+    "name": "Wooden Spear",
+    "category": "Melee",
+    "damage": 8,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "stone_spear",
+    "name": "Stone Spear",
+    "category": "Melee",
+    "damage": 12,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "machete",
+    "name": "Machete",
+    "category": "Melee",
+    "damage": 15,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "mace",
+    "name": "Mace",
+    "category": "Melee",
+    "damage": 18,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "salvaged_cleaver",
+    "name": "Salvaged Cleaver",
+    "category": "Melee",
+    "damage": 20,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "salvaged_sword",
+    "name": "Salvaged Sword",
+    "category": "Melee",
+    "damage": 22,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "longsword",
+    "name": "Longsword",
+    "category": "Melee",
+    "damage": 28,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
+  },
+  {
+    "id": "salvaged_hammer",
+    "name": "Salvaged Hammer",
+    "category": "Melee",
+    "damage": 25,
+    "sulfur": 0,
+    "notes": "Per hit. Placeholder — verify in-game."
   }
 ]

@@ -145,6 +145,58 @@
     "pickaxe": {
       "name": "Pickaxe",
       "notes": "Per hit."
+    },
+    "rock": {
+      "name": "Rock",
+      "notes": "Starter item. Per hit. Placeholder — verify in-game."
+    },
+    "bone_club": {
+      "name": "Bone Club",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "bone_knife": {
+      "name": "Bone Knife",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "hunting_knife": {
+      "name": "Hunting Knife",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "combat_knife": {
+      "name": "Combat Knife",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "wooden_spear": {
+      "name": "Wooden Spear",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "stone_spear": {
+      "name": "Stone Spear",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "machete": {
+      "name": "Machete",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "mace": {
+      "name": "Mace",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "salvaged_cleaver": {
+      "name": "Salvaged Cleaver",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "salvaged_sword": {
+      "name": "Salvaged Sword",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "longsword": {
+      "name": "Longsword",
+      "notes": "Per hit. Placeholder — verify in-game."
+    },
+    "salvaged_hammer": {
+      "name": "Salvaged Hammer",
+      "notes": "Per hit. Placeholder — verify in-game."
     }
   }
 }

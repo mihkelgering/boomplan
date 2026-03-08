@@ -7,7 +7,8 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check"
+    "check": "svelte-check",
+    "icons": "node scripts/download-icons.js"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
