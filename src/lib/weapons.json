@@ -85,7 +85,7 @@
     "category": "Melee",
     "damage": 1.46,
     "damagePerHit": 51,
-    "hitsInTotal": 35,
+    "totalHits": 35,
     "sulfur": 0,
     "notes": "Per hit."
   },
@@ -95,7 +95,7 @@
     "category": "Melee",
     "damage": 1.2,
     "damagePerHit": 12.3,
-    "hitsInTotal": 10,
+    "totalHits": 10,
     "sulfur": 0,
     "notes": "Per hit. Very slow."
   },
@@ -189,7 +189,7 @@
     "category": "Melee",
     "damage": 0,
     "damagePerHit": 0,
-    "hitsInTotal": 0,
+    "totalHits": 0,
     "sulfur": 0,
     "notes": ""
   },

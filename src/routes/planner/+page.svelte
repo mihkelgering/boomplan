@@ -139,6 +139,7 @@
               <th>{$t('plan.col.weapon')}</th>
               <th>{$t('plan.col.category')}</th>
               <th>{$t('plan.col.dmg')}</th>
+              <th>{$t('plan.col.hits')}</th>
               <th>{$t('plan.col.qty')}</th>
               <th>{$t('plan.col.totaldmg')}</th>
             </tr>
@@ -157,6 +158,15 @@
                 </td>
                 <td><span class="badge {w.category.toLowerCase()}">{$t('category.' + w.category.toLowerCase())}</span></td>
                 <td class="num">{w.damage}</td>
+                <td class="num">
+                  {#if w.damage > 0 && w.totalHits > 0}
+                    {Math.ceil(Math.ceil(shipHP / w.damage) / w.totalHits)}
+                  {:else if w.damage > 0}
+                    {Math.ceil(shipHP / w.damage)}
+                  {:else}
+                    —
+                  {/if}
+                </td>
                 <td class="qty-cell">
                   <button class="qty-btn" on:click={() => planning[w.id] = Math.max(0, (planning[w.id] || 0) - 1)}>−</button>
                   <input

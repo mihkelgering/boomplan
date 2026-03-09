@@ -64,6 +64,7 @@
       "weapon": "Weapon",
       "category": "Category",
       "dmg": "Dmg / Hit",
+      "hits": "Hits / Items",
       "qty": "Quantity",
       "totaldmg": "Total Dmg"
     },
