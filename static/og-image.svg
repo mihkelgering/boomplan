@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#111111"/>
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="12" height="630" fill="#e8500a"/>
+  <!-- Title -->
+  <text x="80" y="260" font-family="Segoe UI, system-ui, sans-serif" font-size="96" font-weight="700" fill="#e8500a">💥 BoomPlan</text>
+  <!-- Subtitle -->
+  <text x="80" y="360" font-family="Segoe UI, system-ui, sans-serif" font-size="52" font-weight="400" fill="#e2e2e2">Rust Raid Calculator</text>
+  <!-- Sub-subtitle -->
+  <text x="80" y="440" font-family="Segoe UI, system-ui, sans-serif" font-size="36" font-weight="400" fill="#888888">Ships · Buildings · Walls · Doors</text>
+</svg>

@@ -6,6 +6,18 @@
   onMount(initLang);
 </script>
 
+<svelte:head>
+  <title>BoomPlan — Rust Raid Calculator</title>
+  <meta name="description" content="Free Rust raid calculator. Calculate damage, hits, and sulfur cost for any target including ships, buildings, walls, and doors." />
+  <link rel="canonical" href="https://mihkelgering.github.io/boomplan/" />
+  <meta property="og:title" content="BoomPlan — Rust Raid Calculator" />
+  <meta property="og:description" content="Free Rust raid calculator. Calculate damage, hits, and sulfur cost for any target including ships, buildings, walls, and doors." />
+  <meta property="og:url" content="https://mihkelgering.github.io/boomplan/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://mihkelgering.github.io/boomplan/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+</svelte:head>
+
 <main>
   <header>
     <div class="header-inner">

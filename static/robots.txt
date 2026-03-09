@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mihkelgering.github.io/boomplan/sitemap.xml

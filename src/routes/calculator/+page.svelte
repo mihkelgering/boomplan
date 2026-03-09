@@ -58,6 +58,18 @@
   onMount(() => { loadFromURL(); initLang(); });
 </script>
 
+<svelte:head>
+  <title>Raid Calculator — BoomPlan</title>
+  <meta name="description" content="Enter target HP to see all weapons ranked by hits needed and sulfur cost. Covers all Rust raid targets." />
+  <link rel="canonical" href="https://mihkelgering.github.io/boomplan/calculator" />
+  <meta property="og:title" content="Raid Calculator — BoomPlan" />
+  <meta property="og:description" content="Enter target HP to see all weapons ranked by hits needed and sulfur cost. Covers all Rust raid targets." />
+  <meta property="og:url" content="https://mihkelgering.github.io/boomplan/calculator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://mihkelgering.github.io/boomplan/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+</svelte:head>
+
 <main>
   <header>
     <div class="header-inner">

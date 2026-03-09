@@ -63,6 +63,18 @@
   onMount(() => { loadFromURL(); initLang(); });
 </script>
 
+<svelte:head>
+  <title>Raid Planner — BoomPlan</title>
+  <meta name="description" content="Plan your raid loadout, track total damage dealt, and find the cheapest weapons to cover remaining HP." />
+  <link rel="canonical" href="https://mihkelgering.github.io/boomplan/planner" />
+  <meta property="og:title" content="Raid Planner — BoomPlan" />
+  <meta property="og:description" content="Plan your raid loadout, track total damage dealt, and find the cheapest weapons to cover remaining HP." />
+  <meta property="og:url" content="https://mihkelgering.github.io/boomplan/planner" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://mihkelgering.github.io/boomplan/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+</svelte:head>
+
 <main>
   <header>
     <div class="header-inner">

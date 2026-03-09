@@ -4,6 +4,11 @@
   $: if (browser) document.documentElement.lang = $lang;
 </script>
 
+<svelte:head>
+  <!-- Remove this line when ready to launch -->
+  <meta name="robots" content="noindex, nofollow" />
+</svelte:head>
+
 <slot />
 
 <style>
